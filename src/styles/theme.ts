@@ -1,4 +1,4 @@
-type TColorKey = 'background' | 'text' | 'primary' | 'secondary' | 'accent' | 'border' | 'surface';
+type TColorKey = 'background' | 'text' | 'primary' | 'secondary' | 'accent' | 'border' | 'surface' | 'error';
 export type TThemeName = 'light' | 'dark';
 
 export const getTheme = (themeName: TThemeName) => {
@@ -48,7 +48,8 @@ export const lightTheme: ITheme = {
         surface: '#f8f9fa',
         text: '#212529',
         border: '#dee2e6',
-        accent: '#007bff'
+        accent: '#007bff',
+        error: '#dc3545'
     },
     heading: {
         lg: '2rem',
@@ -105,7 +106,8 @@ export const darkTheme: ITheme = {
         surface: '#343a40',
         text: '#f8f9fa',
         border: '#495057',
-        accent: '#0056b3'
+        accent: '#0056b3',
+        error: '#dc3545'
     },
 };
 

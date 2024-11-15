@@ -1,7 +1,7 @@
 import React from 'react'
 import { formatNumber } from '../utils/formatNumber'
 import Sidebar from '../components/Sidebar'
-import { TThemeName } from '../style/theme';
+import { TThemeName } from '../styles/theme';
 import Title from '../components/Title';
 import Button from '../components/Button';
 import InputText from '../components/InputText';

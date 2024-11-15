@@ -1,12 +1,13 @@
 import { styled } from "styled-components";
-import { TButtonScheme, TButtonSize } from "../style/theme";
+import { TButtonScheme, TButtonSize } from "../styles/theme";
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size: TButtonSize;
   scheme: TButtonScheme;
   disabled?: boolean;
   isLoading?: boolean;
+  type?: "button" | "submit" | "reset";
 }
 
 export default function Button({
@@ -15,6 +16,8 @@ export default function Button({
   scheme,
   disabled,
   isLoading,
+  type,
+  ...props
 }: Props) {
   return (
     <SButton
@@ -22,6 +25,8 @@ export default function Button({
       scheme={scheme}
       disabled={disabled}
       isLoading={isLoading}
+      type={type}
+      {...props}
     >
       {children}
     </SButton>

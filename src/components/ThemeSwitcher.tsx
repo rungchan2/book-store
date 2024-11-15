@@ -1,6 +1,6 @@
 import React from "react";
 
-import { TThemeName } from "../style/theme";
+import { TThemeName } from "../styles/theme";
 import { useContext } from "react";
 import { ThemeContext } from "../context/themeContext";
 

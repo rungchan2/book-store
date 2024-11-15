@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import { HeadingSize } from '../style/theme'
+import { HeadingSize } from '../styles/theme'
 type Props = {
     children: React.ReactNode;
     size: HeadingSize;

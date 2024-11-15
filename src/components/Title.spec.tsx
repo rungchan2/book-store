@@ -1,7 +1,7 @@
 import Title from "./Title";
 import { render, screen } from "@testing-library/react";
 import { BookStoreProvider } from "../context/themeContext";
-import { lightTheme } from "../style/theme";
+import { lightTheme } from "../styles/theme";
 describe("Title", () => {
   it("renders correctly", () => {
     render(
