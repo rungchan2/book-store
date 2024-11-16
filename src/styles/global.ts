@@ -21,9 +21,9 @@ export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>`
         transition: background-color 0.3s ease, color 0.3s ease;
     }
 
-    button {
+    /* button {
         background-color: ${({ theme }) => theme.color.primary};
-        color: ${({ theme }) => theme.color.text};
+        color: ${({ theme }) => theme.color.surface};
         border: 1px solid ${({ theme }) => theme.color.border};
         padding: 8px 16px;
         border-radius: 4px;
@@ -33,7 +33,7 @@ export const GlobalStyle = createGlobalStyle<IGlobalStyleProps>`
         &:hover {
             background-color: ${({ theme }) => theme.color.secondary};
         }
-    }
+    } */
 
     h1, h2, h3, h4, h5, h6 {
         color: ${({ theme }) => theme.color.text};

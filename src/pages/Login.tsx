@@ -1,20 +1,24 @@
+import React from "react";
 import Title from "../components/Title";
-import styled from "styled-components";
 import InputText from "../components/InputText";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { signup } from "../api/auth.api";
+import { login, signup } from "../api/auth.api";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../hooks/useAlert";
+import { SignupStyle } from "./Signup";
+import { useAuthStore } from "../store/authStore";
+
 export interface SignupProps {
   email: string;
   password: string;
 }
 
-export default function Signup() {
+export default function Login() {
   const navigate = useNavigate();
   const showAlert = useAlert();
+  const { isLoggedIn, storeLogin, storeLogout } = useAuthStore();
   const {
     register,
     handleSubmit,
@@ -22,21 +26,24 @@ export default function Signup() {
   } = useForm<SignupProps>();
 
   const onValid = (data: SignupProps) => {
-    signup(data)
+    login(data)
       .then((res) => {
-        showAlert("회원가입이 완료되었습니다.");
-        navigate("/login");
+        storeLogin(res.token);
+        localStorage.setItem("token", res.token);
+        showAlert(res.message);
+        navigate("/");
       })
       .catch((err) => {
         showAlert(err.response.data.message);
-        console.log(err.response);
       });
   };
 
+  console.log(isLoggedIn)
+  
   return (
     <div>
       <Title size="lg" color="primary">
-        회원가입
+        로그인
       </Title>
       <SignupStyle>
         <form onSubmit={handleSubmit(onValid)}>
@@ -59,46 +66,14 @@ export default function Signup() {
             )}
           </fieldset>
           <Button size="lg" scheme="primary" type="submit">
-            회원가입
+            로그인
           </Button>
           <div className="info">
             <Link to="/reset">비밀번호 찾기</Link>
-            <Link to="/login">로그인</Link>
+            <Link to="/signup">회원가입</Link>
           </div>
         </form>
       </SignupStyle>
     </div>
   );
 }
-
-export const SignupStyle = styled.div`
-  max-width: ${({ theme }) => theme.layoutWidth.sm};
-  margin: 0 auto;
-
-  & fieldset {
-    display: flex;
-    padding: 0;
-    margin: 0;
-    border: none;
-    flex-direction: column;
-    gap: 1rem;
-
-    & input {
-      width: 100%;
-    }
-  }
-
-  & .info {
-    margin-top: 1rem;
-    display: flex;
-    gap: 1rem;
-    text-align: center;
-  }
-  & button {
-    margin-top: 1rem;
-    width: 100%;
-  }
-  & .alert {
-    color: ${({ theme }) => theme.color.error};
-  }
-`;

@@ -44,4 +44,5 @@ const SButton = styled.button<Omit<Props, "children">>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   cursor: ${({ disabled }) => (disabled ? "none" : "pointer")};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "auto")};
+  border-radius: 5px;
 `;
