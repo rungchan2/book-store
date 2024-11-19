@@ -4,10 +4,11 @@ import styled from 'styled-components'
 import BooksFilter from '../components/Books/BooksFilter'
 import BookViewSwitcher from '../components/Books/BookViewSwitcher'
 import BookList from '../components/Books/BooksList'
-import BooksEmpty from '../components/Books/BooksEmpty'
+import BooksEmpty from '../components/Books/EmptySection'
 import Pagination from '../components/Books/Pagination'
 import { useBooks } from '../hooks/useBooks'
 import { Book } from '../types/book.type'
+import { FaSmile } from 'react-icons/fa'
 
 export default function Books() {
   const { books, pagination, isEmpty } = useBooks();
@@ -28,7 +29,7 @@ export default function Books() {
                 <Pagination pagination={pagination} />
               </>
             ) : (
-              <BooksEmpty />
+              <BooksEmpty icon={<FaSmile />} message="검색결과가 없습니다." link="/books" linkText="전체 결과 검색" />
             )}
         </BookListContainer>
     </div>

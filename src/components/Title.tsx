@@ -16,4 +16,5 @@ export default function Title({ children, size, color }: Props) {
 const Heading = styled.h1<Omit<Props, 'children'>>`
     font-size: ${({ theme, size }) => theme.heading[size]};
     color: ${({ color }) => color};
+    margin: 0;
 `;

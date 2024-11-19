@@ -1,5 +1,5 @@
 import { httpClient } from "./http";
-import { Book } from "../types/book.type";
+import { Book, BookDetailResponse } from "../types/book.type";
 import { Pagination } from "../types/pagination.type";
 
 interface FetchBooksParams {
@@ -31,3 +31,30 @@ export const fetchBooks = async (params: FetchBooksParams) => {
     };
   }
 };
+
+export const fetchBookDetail = async (bookId: string) => {
+  try {
+    const response = await httpClient.get<BookDetailResponse>(`/books/${bookId}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const likeBook = async (bookId: number) => {
+    try {
+        const response = await httpClient.post(`/likes/${bookId}`);
+        return response.data;
+    } catch (error) {
+        return null;
+    }
+}
+
+export const unLikeBook = async (bookId: number) => {
+    try {
+        const response = await httpClient.delete(`/likes/${bookId}`);
+        return response.data;
+    } catch (error) {
+        return null;
+    }
+}

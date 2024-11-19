@@ -18,7 +18,7 @@ export default function ResetPW() {
   const [resetRequest, setResetRequest] = useState<boolean>(false);
 
   const navigate = useNavigate();
-  const showAlert = useAlert();
+  const {showAlert} = useAlert();
 
   const {
     register,

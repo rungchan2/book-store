@@ -6,3 +6,8 @@ export interface Cart {
     price: number;
     quantity: number;
 }
+
+export interface CartResponse {
+    results: Cart[];
+    message: string;
+}

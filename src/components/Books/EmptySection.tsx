@@ -5,18 +5,25 @@ import Title from "../Title";
 import { Link } from "react-router-dom";
 import Button from "../Button";
 
-export default function BooksEmpty() {
+interface BooksEmptyProps {
+  icon: React.ReactNode;
+  message: string;
+  link: string;
+  linkText: string;
+}
+
+export default function BooksEmpty({ icon, message, link, linkText }: BooksEmptyProps) {
   return (
     <BooksEmptyContainer>
       <div className="icon">
-        <FaSmile />
+        {icon}
       </div>
 
       <Title size="lg" color="secondary">
-        검색결과가 없습니다.
+        {message}
       </Title>
       <p>
-        <Link to="/books">전체 결과 검색</Link>
+        <Link to={link}>{linkText}</Link>
       </p>
     </BooksEmptyContainer>
   );
@@ -30,10 +37,12 @@ const BooksEmptyContainer = styled.div`
   padding: 120px 0;
 
   .icon {
+    margin-bottom: 1rem;
     svg {
       font-size: 4rem;
       fill: #ccc;
     }
+
   }
 
   p {

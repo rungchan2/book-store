@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { formatNumber } from "../../utils/formatNumber";
 import { FaStar } from "react-icons/fa";
 import { ViewMode } from "./BookViewSwitcher";
+import { Link } from "react-router-dom";
 
 export default function BookItem({
   book,
@@ -15,19 +16,21 @@ export default function BookItem({
 }) {
   return (
     <BookItemContainer view={view}>
-      <div className="book-item-image">
-        <img src={getBookImage(book.id)} alt={book.title} />
-      </div>
-      <div className="content">
-        <div className="title">{book.title}</div>
-        <div className="summary">{book.summary}</div>
-        <div className="author">{book.author}</div>
-        <div className="price">{formatNumber(book.price)}</div>
-        <div className="likes">
-          <FaStar />
-          <span>{book.likes}</span>
+      <Link to={`/books/${book.id}`}>
+        <div className="book-item-image">
+          <img src={getBookImage(book.id)} alt={book.title} />
         </div>
-      </div>
+        <div className="content">
+          <div className="title">{book.title}</div>
+          <div className="summary">{book.summary}</div>
+          <div className="author">{book.author}</div>
+          <div className="price">{formatNumber(book.price)}</div>
+          <div className="likes">
+            <FaStar />
+            <span>{book.likes}</span>
+          </div>
+        </div>
+      </Link>
     </BookItemContainer>
   );
 }
