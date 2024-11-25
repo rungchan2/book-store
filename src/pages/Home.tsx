@@ -1,25 +1,74 @@
-import React from 'react'
-import { formatNumber } from '../utils/formatNumber'
-import Sidebar from '../components/Sidebar'
-import { TThemeName } from '../styles/theme';
-import Title from '../components/Title';
-import Button from '../components/Button';
-import InputText from '../components/InputText';
-interface IProps {  
-    setTheme: (theme: TThemeName) => void;
-    theme: TThemeName;
+import { TThemeName } from "../styles/theme";
+
+import styled from "styled-components";
+import { MainReviews } from "@/components/main/MainReviews";
+import { useMain } from "@/hooks/useMain";
+import Title from "@/components/Title";
+import NewBooks from "@/components/main/NewBooks";
+import { BestSeller } from "@/components/main/BestSeller";
+import { Banner } from "@/components/banner/Banner";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+
+interface IProps {
+  setTheme: (theme: TThemeName) => void;
+  theme: TThemeName;
 }
 
 export default function Home() {
-    const count = 1234567890;
-    const formattedCount = formatNumber(count);
+  const { reviews, bestSeller, bannerList } = useMain();
+  const { isMobile } = useMediaQuery();
+
+  console.log("bannerList", bannerList);
+
   return (
-    <>
-        <Title size="lg" color="text">Hello</Title>
-        <h1>{formattedCount}</h1>
-        <Sidebar />
-        <Button size="lg" scheme="primary" disabled>Click me</Button>
-        <InputText placeholder="Enter your name" />
-    </>
-  )
+    <StyledHome>
+      {/* 배너 */}
+      <section>
+        <Banner bannerList={bannerList} />
+      </section>
+
+      {/* 베스트 셀러 */}
+      <section>
+        <Title size="lg" color="primary">
+          베스트 셀러
+        </Title>
+        <BestSeller bestSeller={bestSeller} />
+      </section>
+
+      {/* 신간 */}
+      <section>
+        <Title size="lg" color="primary">
+          신간
+        </Title>
+        <NewBooks />
+      </section>
+
+      {/* 리뷰 */}
+      <section className="reviews">
+        <Title size="lg" color="primary">
+          리뷰
+        </Title>
+        <MainReviews reviews={reviews} />
+      </section>
+    </StyledHome>
+  );
 }
+
+const StyledHome = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .reviews {
+    width: 100%;
+  }
+
+`;

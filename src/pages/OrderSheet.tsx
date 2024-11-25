@@ -43,8 +43,8 @@ export default function OrderSheet() {
 
     showConfirm("주문을 진행하시겠습니까?", () => {
       createOrder(orderDataWithDelivery)
-        .then((response) => {
-          showAlert(response.data.message);
+        .then(() => {
+          showAlert('주문이 완료되었습니다.');
           navigate("/");
         })
         .catch((error) => {

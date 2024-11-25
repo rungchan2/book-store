@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+## 프로젝트 개요
+- React와 TypeScript를 사용한 온라인 서점 웹 애플리케이션
+- CRA(Create React App)를 기반으로 구축
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 주요 기술 스택
+- **프론트엔드 프레임워크**: React 18
+- **언어**: TypeScript
+- **스타일링**: Styled Components
+- **상태 관리**: 
+  - React Query (데이터 페칭)
+  - Zustand (토스트 메시지)
+- **라우팅**: React Router DOM
+- **개발 도구**: 
+  - MSW (API 모킹)
+  - Craco (CRA 설정 커스터마이징)
 
-## Available Scripts
+## 주요 기능
+1. **도서 관련**
+   - 도서 목록 조회
+   - 도서 상세 정보
+   - 베스트셀러
+   - 신간 도서
 
-In the project directory, you can run:
+2. **사용자 기능**
+   - 장바구니
+   - 주문/결제
+   - 리뷰 작성/조회
 
-### `npm start`
+3. **UI/UX**
+   - 반응형 디자인 (모바일/데스크톱)
+   - 다크/라이트 테마
+   - 토스트 메시지
+   - 무한 스크롤
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 프로젝트 구조
+```
+src/
+├── api/          # API 통신 관련
+├── components/   # 재사용 가능한 컴포넌트
+├── context/      # Context API
+├── hooks/        # 커스텀 훅
+├── mock/         # MSW 모킹 데이터
+├── pages/        # 페이지 컴포넌트
+├── store/        # 상태 관리
+├── styles/       # 전역 스타일 및 테마
+└── types/        # TypeScript 타입 정의
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 특이사항
+- MSW를 활용한 API 모킹으로 백엔드 의존성 없이 개발 가능
+- Craco와 절대 경로 설정으로 깔끔한 import 구조
+- 재사용 가능한 컴포넌트 설계 (Button, Title 등)
+- 반응형 웹 디자인 구현
+- TypeScript를 활용한 타입 안정성 확보

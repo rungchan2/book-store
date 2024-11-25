@@ -11,17 +11,17 @@ export const useAlert = () => {
   }, []);
 
   const showAlert = useCallback((message: string) => {
-    toast.info(message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-      transition: Slide,
-    });
+    // toast.info(message, {
+    //   position: "top-center",
+    //   autoClose: 3000,
+    //   hideProgressBar: false,
+    //   closeOnClick: true,
+    //   pauseOnHover: true,
+    //   draggable: true,
+    //   progress: undefined,
+    //   theme: "light",
+    //   transition: Slide,
+    // });
   }, []);
   return { showAlert, showConfirm };
 };

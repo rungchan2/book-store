@@ -36,4 +36,9 @@ const StyledFooter = styled.footer`
       font-size: 0.8rem;
     }
   }
+
+  @media screen AND (${({ theme }) => theme.mediaQuery.mobile}) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;

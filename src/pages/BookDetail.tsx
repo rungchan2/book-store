@@ -10,7 +10,12 @@ import Title from "../components/Title";
 import EllipsisBox from "../components/EllipsisBox";
 import LikeButton from "../components/LikeButton";
 import AddCart from "../components/Book/AddCart";
-
+import BookReview from "../components/Book/BookReview";
+import AddReview from "../components/Book/AddReview";
+import { Tabs, Tab } from "@/components/common/Tabs";
+import { useToast } from "@/hooks/useToast";
+import { Modal } from "@/components/modal/Modal";
+import { useState } from "react";
 const infoList = [
   {
     label: "저자",
@@ -55,7 +60,8 @@ const infoList = [
 
 export default function BookDetail() {
   const { id } = useParams();
-  const { bookResults, likeToggle } = useBook(id as string);
+  const { bookResults, likeToggle, reviews, addReview } = useBook(id as string);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   if (!bookResults) {
     return <div>Loading...</div>;
@@ -63,12 +69,18 @@ export default function BookDetail() {
 
   console.log(bookResults);
 
+
   return (
     <BookDetailContainer>
       <div className="header">
-        <div className="img">
+        <div className="img" onClick={() => setIsModalOpen(true)}>
           <img src={getBookImage(bookResults?.id)} alt={bookResults?.title} />
         </div>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <div className="img">
+            <img src={getBookImage(bookResults?.id)} alt={bookResults?.title} />
+          </div>
+        </Modal>
         <div className="info">
           <Title size="lg" color="black">
             {bookResults?.title}
@@ -95,15 +107,24 @@ export default function BookDetail() {
         </div>
       </div>
       <div className="content">
-        <Title size="md" color="black">
-          상세 정보
-        </Title>
-        <EllipsisBox lineLimit={3}>{bookResults?.detail}</EllipsisBox>
-
-        <Title size="md" color="black">
-          목차
-        </Title>
-        <div className="toc">{bookResults?.contents}</div>
+        <Tabs>
+          <Tab title="상세 정보">
+            <Title size="md" color="black">
+              상세 정보
+            </Title>
+            <EllipsisBox lineLimit={3}>{bookResults?.detail}</EllipsisBox>
+          </Tab>
+          <Tab title="목차">
+            <Title size="md" color="black">
+              목차
+            </Title>
+            <div className="toc">{bookResults?.contents}</div>
+          </Tab>
+          <Tab title="리뷰">
+            <AddReview addReview={addReview} />
+            <BookReview reviews={reviews} />
+          </Tab>
+        </Tabs>
       </div>
     </BookDetailContainer>
   );

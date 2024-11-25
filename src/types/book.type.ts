@@ -24,3 +24,11 @@ export interface BookDetailResponse {
   message: string;
   results: IBookDetail[];
 }
+
+export interface Review {
+  id: number;
+  userName: string;
+  content: string;
+  createdAt: string;
+  score: number;
+}

@@ -17,107 +17,80 @@ import Cart from "./pages/Cart";
 import OrderSheet from "./pages/OrderSheet";
 import { ToastContainer } from "react-toastify";
 import OrderList from "./pages/OrderList";
+import { QueryClientProvider } from "react-query";
+import { queryClient } from "@/api/queryClient";
+import { default as CustomToastContainer } from "@/components/toast/ToastContainer";
 
-const router = createBrowserRouter([
+const routerList = [
   {
     path: "/",
-    element: (
-      <Layout>
-        <Home />
-      </Layout>
-    ),
-    errorElement: <Errors />,
+    element: <Home />,
   },
   {
     path: "/signup",
-    element: (
-      <Layout>
-        <Signup />
-      </Layout>
-    ),
-    errorElement: <Errors />,
+    element: <Signup />,
   },
   {
     path: "/reset",
-    element: (
-      <Layout>
-        <ResetPW />
-      </Layout>
-    ),
-    errorElement: <Errors />,
+    element: <ResetPW />,
   },
   {
     path: "/login",
-    element: (
-      <Layout>
-        <Login />
-      </Layout>
-    ),
-    errorElement: <Errors />,
+    element: <Login />,
   },
   {
     path: "/books",
-    element: (
-      <Layout>
-        <Books />
-      </Layout>
-    ),
-    errorElement: <Errors />,
+    element: <Books />,
   },
   {
     path: "/books/:id",
-    element: (
-      <Layout>
-        <BookDetail />
-      </Layout>
-    ),
-    errorElement: <Errors />,
+    element: <BookDetail />,
   },
   {
     path: "/cart",
-    element: (
-      <Layout>
-        <Cart />
-      </Layout>
-    ),
+    element: <Cart />,
   },
   {
     path: "/order",
-    element: (
-      <Layout>
-        <OrderSheet />
-      </Layout>
-    ),
+    element: <OrderSheet />,
   },
   {
     path: "/orderlist",
-    element: (
-      <Layout>
-        <OrderList />
-      </Layout>
-    ),
+    element: <OrderList />,
   },
-]);
+];
+
+const router = createBrowserRouter(
+  routerList.map((route) => {
+    return {
+      ...route,
+      element: <Layout>{route.element}</Layout>,
+      errorElement: <Errors />,
+    };
+  })
+);
 
 function App() {
   return (
-    <BookStoreProvider>
-      <ThemeSwitcher />
-      <RouterProvider router={router} />
-      <ToastContainer
-        position="top-center"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Slide}
-      />
-    </BookStoreProvider>
+    <QueryClientProvider client={queryClient}>
+      <BookStoreProvider>
+        <RouterProvider router={router} />
+        {/* <ToastContainer
+          position="top-center"
+          autoClose={3000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Slide}
+        /> */}
+        <CustomToastContainer />
+      </BookStoreProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -4,17 +4,14 @@ import InputText from "../components/InputText";
 import Button from "../components/Button";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { signup } from "../api/auth.api";
-import { useNavigate } from "react-router-dom";
-import { useAlert } from "../hooks/useAlert";
+import { useAuth } from "@/hooks/useAuth";
 export interface SignupProps {
   email: string;
   password: string;
 }
 
 export default function Signup() {
-  const navigate = useNavigate();
-  const {showAlert, showConfirm} = useAlert();
+  const { useSignup } = useAuth();
   const {
     register,
     handleSubmit,
@@ -22,15 +19,7 @@ export default function Signup() {
   } = useForm<SignupProps>();
 
   const onValid = (data: SignupProps) => {
-    signup(data)
-      .then((res) => {
-        showAlert("회원가입이 완료되었습니다.");
-        navigate("/login");
-      })
-      .catch((err) => {
-        showAlert(err.response.data.message);
-        console.log(err.response);
-      });
+    useSignup(data)
   };
 
   return (

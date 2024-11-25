@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../hooks/useAlert";
 import { SignupStyle } from "./Signup";
 import { resetPW, pwResetRequest } from "../api/auth.api";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface ResetPWProps {
   email: string;
@@ -15,11 +16,7 @@ export interface ResetPWProps {
 }
 
 export default function ResetPW() {
-  const [resetRequest, setResetRequest] = useState<boolean>(false);
-
-  const navigate = useNavigate();
-  const {showAlert} = useAlert();
-
+  const { useResetPassword, usePwResetRequest, resetRequest } = useAuth();
   const {
     register,
     handleSubmit,
@@ -27,24 +24,7 @@ export default function ResetPW() {
   } = useForm<ResetPWProps>();
 
   const onSubmit = (data: ResetPWProps) => {
-    if (resetRequest) {
-        resetPW(data)
-        .then((res) => {
-          showAlert("비밀번호 초기화가 완료되었습니다.");
-          navigate("/login");
-        })
-        .catch((err) => {
-          showAlert(err.response.data.message);
-        });
-    } else {
-        pwResetRequest(data)
-        .then((res) => {
-          setResetRequest(true);
-        })
-        .catch((err) => {
-          showAlert(err.response.data.message);
-        });
-    }
+    resetRequest ? useResetPassword(data) : usePwResetRequest(data)
   };
 
   return (

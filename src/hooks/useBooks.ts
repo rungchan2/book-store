@@ -5,6 +5,7 @@ import { Pagination } from "../types/pagination.type";
 import { fetchBooks } from "../api/books.api";
 import { QUERY_STRING } from "../constants/queryString";
 import { LIMIT } from "../constants/pagnation";
+import { useQuery } from "react-query";
 
 interface UseBooks {
   books: Book[];
@@ -12,18 +13,11 @@ interface UseBooks {
   isEmpty: boolean;
 }
 
-export const useBooks = () : UseBooks =>  {
+export const useBooks = () => {
   const location = useLocation();
+  const params = new URLSearchParams(location.search);
 
-  const [books, setBooks] = useState<Book[]>([]);
-  const [pagination, setPagination] = useState<Pagination>({
-    currentPage: 1,
-    totalCount: 0,
-  });
-  const [isEmpty, setIsEmpty] = useState(false);
-
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
+  const { data: booksData, isLoading: isBooksLoading } = useQuery(["books", location.search], () => 
     fetchBooks({
       category_id: params.get(QUERY_STRING.CATEGORY_ID)
         ? Number(params.get(QUERY_STRING.CATEGORY_ID))
@@ -33,12 +27,13 @@ export const useBooks = () : UseBooks =>  {
         ? Number(params.get(QUERY_STRING.PAGE))
         : 1,
       limit: LIMIT,
-    }).then((data) => {
-      setBooks(data.books);
-      setPagination(data.pagination);
-      setIsEmpty(data.books.length === 0);
-    });
-  }, [location.search]);
+    })
+  );
 
-  return { books, pagination, isEmpty };
+  return { 
+    books: booksData?.books,
+    pagination: booksData?.pagination,
+    isEmpty: booksData?.books.length === 0,
+    isBooksLoading
+  };
 };

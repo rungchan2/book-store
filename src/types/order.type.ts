@@ -36,6 +36,6 @@ export interface OrderListResponse {
     results: Order[];
 }
 
-export interface OrderWithListOfDetail extends Order {
+export interface OrderDetailItem extends Order {
     detail?: OrderDetail[];
 }

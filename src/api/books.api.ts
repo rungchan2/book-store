@@ -15,10 +15,9 @@ interface FetchBooksResponse {
 }
 
 export const fetchBooks = async (params: FetchBooksParams) => {
-
-    try {
-        const response = await httpClient.get<FetchBooksResponse>("/books", { 
-            params: params
+  try {
+    const response = await httpClient.get<FetchBooksResponse>("/books", {
+      params: params,
     });
     return response.data;
   } catch (error) {
@@ -34,7 +33,9 @@ export const fetchBooks = async (params: FetchBooksParams) => {
 
 export const fetchBookDetail = async (bookId: string) => {
   try {
-    const response = await httpClient.get<BookDetailResponse>(`/books/${bookId}`);
+    const response = await httpClient.get<BookDetailResponse>(
+      `/books/${bookId}`
+    );
     return response.data;
   } catch (error) {
     return null;
@@ -42,19 +43,28 @@ export const fetchBookDetail = async (bookId: string) => {
 };
 
 export const likeBook = async (bookId: number) => {
-    try {
-        const response = await httpClient.post(`/likes/${bookId}`);
-        return response.data;
-    } catch (error) {
-        return null;
-    }
-}
+  try {
+    const response = await httpClient.post(`/likes/${bookId}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
 
 export const unLikeBook = async (bookId: number) => {
-    try {
-        const response = await httpClient.delete(`/likes/${bookId}`);
-        return response.data;
-    } catch (error) {
-        return null;
-    }
-}
+  try {
+    const response = await httpClient.delete(`/likes/${bookId}`);
+    return response.data;
+  } catch (error) {
+    return null;
+  }
+};
+
+export const fetchBestSeller = async () => {
+  try {
+    const response = await httpClient.get<Book[]>("http://localhost:9999/books/best-seller");
+    return response.data;
+  } catch (error) {
+    return [];
+  }
+};

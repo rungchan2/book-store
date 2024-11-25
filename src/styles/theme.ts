@@ -8,6 +8,7 @@ export type TButtonSize = 'sm' | 'md' | 'lg';
 export type TButtonScheme = 'primary' | 'secondary' | 'accent';
 export type TBorderRadius = 'lg' | 'md' | 'sm';
 export type TLayoutWidth = 'sm' | 'md' | 'lg';
+export type TDevice = 'mobile' | 'tablet' | 'desktop';
 
 export interface ITheme {
     name: TThemeName;
@@ -34,6 +35,9 @@ export interface ITheme {
     },
     layoutWidth: {
         [key in TLayoutWidth]: string;
+    },
+    mediaQuery: {
+        [key in TDevice]: string;
     }
 }
 
@@ -93,6 +97,11 @@ export const lightTheme: ITheme = {
         sm: '320px',
         md: '768px',
         lg: '1024px'
+    },
+    mediaQuery: {
+        mobile: '(max-width: 768px)',
+        tablet: '(max-width: 1024px)',
+        desktop: '(min-width: 1024px)'
     }
 };
 

@@ -1,8 +1,8 @@
 import React from "react";
-import { Book } from "../../types/book.type";
-import { getBookImage } from "../../utils/image";
+import { Book } from "@/types/book.type";
+import { getBookImage } from "@/utils/image";
 import styled from "styled-components";
-import { formatNumber } from "../../utils/formatNumber";
+import { formatNumber } from "@/utils/formatNumber";
 import { FaStar } from "react-icons/fa";
 import { ViewMode } from "./BookViewSwitcher";
 import { Link } from "react-router-dom";
@@ -35,7 +35,7 @@ export default function BookItem({
   );
 }
 
-const BookItemContainer = styled.div<{ view: ViewMode }>`
+export const BookItemContainer = styled.div<{ view: ViewMode }>`
   display: flex;
   flex-direction: ${({ view }) => (view === "list" ? "row" : "column")};
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "../hooks/useAlert";
 import { SignupStyle } from "./Signup";
 import { useAuthStore } from "../store/authStore";
+import { useAuth } from "@/hooks/useAuth";
 
 export interface SignupProps {
   email: string;
@@ -16,30 +17,16 @@ export interface SignupProps {
 }
 
 export default function Login() {
-  const navigate = useNavigate();
-  const {showAlert} = useAlert();
-  const { isLoggedIn, storeLogin, storeLogout } = useAuthStore();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<SignupProps>();
+  const { useLogin } = useAuth();
 
   const onValid = (data: SignupProps) => {
-    login(data)
-      .then((res) => {
-        storeLogin(res.token);
-        localStorage.setItem("token", res.token);
-        showAlert(res.message);
-        navigate("/");
-      })
-      .catch((err) => {
-        showAlert(err.response.data.message);
-      });
-  };
-
-  console.log(isLoggedIn)
-  
+    useLogin(data)
+  };  
   return (
     <div>
       <Title size="lg" color="primary">
@@ -52,6 +39,8 @@ export default function Login() {
               placeholder="이메일"
               type="email"
               {...register("email", { required: true })}
+              autoFocus
+              inputMode="email"
             />
             {errors.email && (
               <span className="alert">이메일을 입력해주세요.</span>
@@ -60,6 +49,7 @@ export default function Login() {
               placeholder="비밀번호"
               type="password"
               {...register("password", { required: true })}
+              inputMode="text"
             />
             {errors.password && (
               <span className="alert">비밀번호를 입력해주세요.</span>
